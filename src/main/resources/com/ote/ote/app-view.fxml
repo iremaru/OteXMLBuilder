@@ -11,11 +11,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ote.ote.AppController">
+<VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" spacing="20.0" styleClass="main" stylesheets="@app-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ote.ote.AppController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RExENI" textAlignment="CENTER">
+    <Text fill="#dfe1e8" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="RExENI" textAlignment="CENTER">
         <font>
             <Font name="Ebrima Bold" size="36.0" />
         </font>
@@ -23,50 +23,69 @@
             <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
         </VBox.margin>
     </Text>
-    <HBox alignment="CENTER_RIGHT" minWidth="500.0" spacing="24.0">
-        <children>
-
-            <Label fx:id="inputDir_label" alignment="CENTER_RIGHT" contentDisplay="CENTER" minWidth="200.0" text="Ningún archivo seleccionado" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
-                <opaqueInsets>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                </opaqueInsets>
-                <font>
-                    <Font name="Ebrima" size="12.0" />
-                </font>
-            </Label>
-            <Button onAction="#onLoadButtonClick" prefWidth="120.0" text="Cargar archivo" />
-        </children>
-        <opaqueInsets>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-        </opaqueInsets>
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
-    </HBox>
+   <Separator layoutX="30.0" layoutY="269.0" prefWidth="200.0" />
+   <VBox styleClass="section">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione los archivos a convertir en xml">
+            <font>
+               <Font name="Ebrima Bold" size="12.0" />
+            </font>
+         </Text>
+          <HBox alignment="CENTER_RIGHT" minWidth="500.0" spacing="24.0">
+              <children>
+      
+                  <Label fx:id="inputDir_label" alignment="CENTER_RIGHT" contentDisplay="CENTER" minWidth="200.0" text="Ningún archivo seleccionado" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
+                      <opaqueInsets>
+                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                      </opaqueInsets>
+                      <font>
+                          <Font name="Ebrima" size="12.0" />
+                      </font>
+                  </Label>
+                  <Button onAction="#onLoadButtonClick" prefWidth="125.0" text="Cargar archivo" />
+              </children>
+              <opaqueInsets>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+              </opaqueInsets>
+              <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+              </padding>
+          </HBox>
+      </children>
+   </VBox>
     <Separator prefWidth="200.0" />
-    <HBox alignment="CENTER_RIGHT" minWidth="500.0" spacing="24.0">
-        <children>
-            <Label fx:id="outDir_label" alignment="TOP_RIGHT" minWidth="200.0" text="Ningún directorio seleccionado" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
-                <opaqueInsets>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                </opaqueInsets>
-                <font>
-                    <Font name="Ebrima" size="12.0" />
-                </font>
-            </Label>
-            <Button onAction="#onLoadButtonClick" prefWidth="120.0" text="Cambiar directorio">
-                <font>
-                    <Font name="Ebrima" size="12.0" />
-                </font>
-            </Button>
-        </children>
-        <opaqueInsets>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-        </opaqueInsets>
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
-    </HBox>
+   <VBox styleClass="section">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione el directorio donde quieres que se generen los nuevos archivos">
+            <font>
+               <Font name="Ebrima Bold" size="12.0" />
+            </font>
+         </Text>
+          <HBox alignment="CENTER_RIGHT" minWidth="500.0" spacing="24.0">
+              <children>
+                  <Label fx:id="outputDir_label" alignment="TOP_RIGHT" minWidth="200.0" text="Ningún directorio seleccionado" textAlignment="RIGHT" HBox.hgrow="ALWAYS">
+                      <opaqueInsets>
+                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                      </opaqueInsets>
+                      <font>
+                          <Font name="Ebrima" size="12.0" />
+                      </font>
+                  </Label>
+                  <Button onAction="#onOutputDirButtonClick" prefWidth="125.0" text="Cambiar directorio">
+                      <font>
+                          <Font name="Ebrima" size="12.0" />
+                      </font>
+                  </Button>
+              </children>
+              <opaqueInsets>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+              </opaqueInsets>
+              <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+              </padding>
+          </HBox>
+      </children>
+   </VBox>
     <Separator prefWidth="200.0" />
     <TableView>
         <columns>
