@@ -7,6 +7,6 @@ module com.ote.ote {
     requires jakarta.xml.bind;
     requires com.dlsc.formsfx;
 
-    opens com.ote.ote to javafx.fxml;
-    exports com.ote.ote;
+    opens com.ote.rexeni to javafx.fxml;
+    exports com.ote.rexeni;
 }

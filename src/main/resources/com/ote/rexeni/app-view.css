@@ -1,0 +1,94 @@
+
+* {
+    -color-main:  rgba(68, 82, 116, 0.6);
+    -primary-100:#0D6E6E;
+    -primary-200:#4a9d9c;
+    -primary-300:#afffff;
+    -accent-100:#FF3D3D;
+    -accent-200:#ffe0c8;
+    -text-100: #dfe2ea;
+    -text-200:#e0e0e0;
+    -bg-100:#0D1F2D;
+    -bg-200:#1d2e3d;
+    -bg-300:#354656;
+
+}
+
+.main {
+    -fx-background-color: -bg-100;
+    -fx-background-radius: 0 50 25 25;
+}
+
+.section {
+    -fx-background-color: -primary-100;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+}
+
+.text-light {
+    --fxbackground-color: -text-100;
+}
+
+.button {
+    -fx-background-color: -primary-100;
+    -fx-background-radius: 10;
+    -fx-border-color: -primary-300;
+    -fx-border-radius: 10;
+    -fx-text-fill: -text-100;
+
+}
+
+.button:hover {
+    -fx-background-color: -primary-300;
+    -fx-text-fill: -primary-100;
+    -fx-font-weight: bold;
+}
+
+/*************************
+/       TABLEVIEW
+*************************/
+
+.table-view {
+    -fx-background-color: -bg-200;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #10162E;
+}
+
+.table-view > .placeholder {
+    -fx-background-color: -bg-300;
+    -fx-background-radius: 8 8 0 0;
+    -fx-border-color: #10162E;
+}
+.table-view > .placeholder > .label {
+    -fx-text-fill: -text-100;
+}
+
+
+.table-view .column-header:hover {
+    -fx-background-color:  -primary-300;
+    -fx-border-width: 2;
+    -fx-border-color: #10162E;
+    -fx-border-style: solid;
+}
+
+.table-view .column-header:hover .label {
+    -fx-text-fill: -bg-100;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: -primary-100;
+    -fx-size: 35;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.column-header {
+    -fx-background-color: -bg-200;
+}
+
+.column-header .label {
+    -fx-text-fill: -bg-100;
+}
