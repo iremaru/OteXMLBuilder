@@ -103,7 +103,7 @@
           <Separator prefWidth="200.0" />
          <HBox spacing="20.0" VBox.vgrow="NEVER">
             <children>
-               <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="592.0" text="Convertir de a XML" />
+               <Button fx:id="btnTransform" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#onTransformButtonClick" prefHeight="27.0" prefWidth="592.0" text="Convertir de Excel a XML" />
                <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="592.0" text="Firmar archivos" />
             </children>
          </HBox>

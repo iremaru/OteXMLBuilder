@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facturas>
+<factura>
+    <nombre>Gisela</nombre>
+    <importe>5</importe>
+</factura>
+    <factura>
+        <nombre>Irene</nombre>
+        <importe>4</importe>
+    </factura>
+</facturas>

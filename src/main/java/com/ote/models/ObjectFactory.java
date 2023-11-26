@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _PurchaseOrder_QNAME = new QName("http://tempuri.org/PurchaseOrderSchema.xsd", "PurchaseOrder");
+    private final static QName _Facturas_QNAME = new QName("", "facturas");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.ote.models
@@ -34,32 +34,32 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PurchaseOrderType }
+     * Create an instance of {@link FacturasType }
      * 
      */
-    public PurchaseOrderType createPurchaseOrderType() {
-        return new PurchaseOrderType();
+    public FacturasType createFacturasType() {
+        return new FacturasType();
     }
 
     /**
-     * Create an instance of {@link USAddress }
+     * Create an instance of {@link FacturaType }
      * 
      */
-    public USAddress createUSAddress() {
-        return new USAddress();
+    public FacturaType createFacturaType() {
+        return new FacturaType();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PurchaseOrderType }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link FacturasType }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link PurchaseOrderType }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link FacturasType }{@code >}
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/PurchaseOrderSchema.xsd", name = "PurchaseOrder")
-    public JAXBElement<PurchaseOrderType> createPurchaseOrder(PurchaseOrderType value) {
-        return new JAXBElement<PurchaseOrderType>(_PurchaseOrder_QNAME, PurchaseOrderType.class, null, value);
+    @XmlElementDecl(namespace = "", name = "facturas")
+    public JAXBElement<FacturasType> createFacturas(FacturasType value) {
+        return new JAXBElement<FacturasType>(_Facturas_QNAME, FacturasType.class, null, value);
     }
 
 }

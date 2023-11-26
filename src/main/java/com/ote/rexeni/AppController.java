@@ -1,7 +1,9 @@
 package com.ote.rexeni;
 
+import com.ote.rexeni.XMLBuilder.XmlBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -21,6 +23,8 @@ public class AppController {
     private Label inputDir_label;
     @FXML
     private Label outputDir_label;
+    @FXML
+    private Button btnTransform;
 
     @FXML
     protected void onLoadButtonClick() {
@@ -37,9 +41,10 @@ public class AppController {
         sourceFiles = fileChooser.showOpenMultipleDialog(new Stage());
 
         if (sourceFiles != null) {
+            btnTransform.setDisable(false);
             inputDirectory = sourceFiles.get(0).getParentFile();
             inputDir_label.setText(sourceFiles.get(0).getName());
-            for (int i = 1; i < sourceFiles.stream().count(); i++) {
+            for (int i = 1; i < (long) sourceFiles.size(); i++) {
                 inputDir_label.setText(inputDir_label.getText()
                         + ", "
                         + sourceFiles.get(i).getName()
@@ -55,7 +60,16 @@ public class AppController {
         chooser.setTitle(TITLE_CHOOSER_OUTPUT);
 
         outputDirectory = chooser.showDialog(new Stage());
-        if (outputDirectory != null) outputDir_label.setText(outputDirectory.getName());
+//        if (outputDirectory != null) outputDir_label.setText(outputDirectory.getName());
+        if (outputDirectory != null) outputDir_label.setText(outputDirectory.getAbsolutePath());
+    }
+
+    @FXML
+    protected void onTransformButtonClick() {
+        if (sourceFiles != null) {
+            XmlBuilder builder = new XmlBuilder();
+            sourceFiles.forEach(builder::generate);
+        }
     }
 
     @FXML
