@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class XmlBuilder {
+    final String FIRST_COLUMN_NAME = "Fecha";
     final String PATH = "src/main/resources/temp/";
     final String filename = "test";
     final String fileExtension = ".xml";
@@ -50,6 +51,13 @@ public class XmlBuilder {
 
     void processWorkbook(Workbook workbook, FacturasType facturas) {
         Sheet sheet = workbook.getSheetAt(0);
+        while (sheet.rowIterator().hasNext()) {
+            Row row = sheet.rowIterator().next();
+
+            row.getCell(0).getStringCellValue();
+        }
+
+
         for (Row row : sheet) {
             if(row.getRowNum() == 0) continue;
 
