@@ -34,11 +34,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FacturasType }
+     * Create an instance of {@link InvoiceGroupType }
      * 
      */
-    public FacturasType createFacturasType() {
-        return new FacturasType();
+    public InvoiceGroupType createFacturasType() {
+        return new InvoiceGroupType();
     }
 
     /**
@@ -50,16 +50,16 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link FacturasType }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link InvoiceGroupType }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link FacturasType }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link InvoiceGroupType }{@code >}
      */
     @XmlElementDecl(namespace = "", name = "facturas")
-    public JAXBElement<FacturasType> createFacturas(FacturasType value) {
-        return new JAXBElement<FacturasType>(_Facturas_QNAME, FacturasType.class, null, value);
+    public JAXBElement<InvoiceGroupType> createFacturas(InvoiceGroupType value) {
+        return new JAXBElement<InvoiceGroupType>(_Facturas_QNAME, InvoiceGroupType.class, null, value);
     }
 
 }

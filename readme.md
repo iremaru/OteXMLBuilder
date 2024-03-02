@@ -1,4 +1,5 @@
 # Ote builder
+
 Haciendo proyectos super chulos con mi madre.
 
 ## Target result
@@ -20,6 +21,7 @@ generate a output file .xml
 - ✅ Files in non-xlsm formats cannot be loaded.
 - ⬜ If multiple files are loaded and one or more do not follow the ENI guidelines to become XLM, those files will not be processed, but the others will.
 - ⬜ If a file is not processed, the user will be notified of the files with errors that could not be converted.
+- ⬜ Digital signature.
 
 ## How to run
 

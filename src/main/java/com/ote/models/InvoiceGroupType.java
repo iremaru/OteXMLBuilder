@@ -30,11 +30,11 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "facturasType", propOrder = {
+@XmlType(name = "InvoiceGroupType", propOrder = {
     "factura"
 })
 @XmlRootElement
-public class FacturasType {
+public class InvoiceGroupType {
 
     protected List<FacturaType> factura;
 
