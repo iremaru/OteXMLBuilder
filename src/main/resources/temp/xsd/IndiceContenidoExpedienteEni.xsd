@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* Copyright 2011-2020 Gobierno de España 
+* Licencia con arreglo a la Licencia Pública de la Unión Europea (EUPL), Versión 1.2 o
+* versiones posteriores en cuanto sean aprobadas por la Comisión Europea (la «Licencia»);
+* Solo podrá usarse esta obra si se respeta la Licencia.
+*
+* Puede obtenerse una copia de la Licencia en:
+* http://eur-lex.europa.eu/legal-content/ES/TXT/PDF/?uri=CELEX:32017D0863&from=EN
+*
+* Salvo cuando lo exija la legislación aplicable o se acuerde por escrito,
+* el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL»,
+* SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas. 
+* Véase la Licencia en el idioma concreto que rige los permisos y limitaciones
+* que establece la Licencia.
+-->
+
+<xsd:schema 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:eniconexpind="http://administracionelectronica.gob.es/ENI/XSD/v1.0/expediente-e/indice-e/contenido" 
+targetNamespace="http://administracionelectronica.gob.es/ENI/XSD/v1.0/expediente-e/indice-e/contenido" 
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="es">XSD CONTENIDO INDICE EXPEDIENTE ELECTRONICO ENI (v1.0)</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="IndiceContenido" type="eniconexpind:TipoIndiceContenido"/>
+	<xsd:complexType name="TipoIndiceContenido">
+		<xsd:sequence>
+			<xsd:element name="FechaIndiceElectronico" type="xsd:dateTime"/>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="DocumentoIndizado" type="eniconexpind:TipoDocumentoIndizado"/>
+				<xsd:element name="ExpedienteIndizado" type="eniconexpind:TipoIndiceContenido"/>
+				<xsd:element name="CarpetaIndizada" type="eniconexpind:TipoCarpetaIndizada"/>
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="TipoDocumentoIndizado">
+		<xsd:sequence>
+			<xsd:element name="IdentificadorDocumento" type="xsd:string"/>
+			<xsd:element name="ValorHuella" type="xsd:string"/>
+			<xsd:element name="FuncionResumen" type="xsd:string"/>
+			<xsd:element name="FechaIncorporacionExpediente" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="OrdenDocumentoExpediente" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="TipoCarpetaIndizada">
+		<xsd:sequence>
+			<xsd:element name="IdentificadorCarpeta" type="xsd:string"/>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="DocumentoIndizado" type="eniconexpind:TipoDocumentoIndizado"/>
+				<xsd:element name="ExpedienteIndizado" type="eniconexpind:TipoIndiceContenido"/>
+				<xsd:element name="CarpetaIndizada" type="eniconexpind:TipoCarpetaIndizada"/>
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>

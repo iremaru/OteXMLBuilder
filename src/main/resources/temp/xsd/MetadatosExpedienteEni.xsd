@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* Copyright 2011-2020 Gobierno de España 
+* Licencia con arreglo a la Licencia Pública de la Unión Europea (EUPL), Versión 1.2 o
+* versiones posteriores en cuanto sean aprobadas por la Comisión Europea (la «Licencia»);
+* Solo podrá usarse esta obra si se respeta la Licencia.
+*
+* Puede obtenerse una copia de la Licencia en:
+* http://eur-lex.europa.eu/legal-content/ES/TXT/PDF/?uri=CELEX:32017D0863&from=EN
+*
+* Salvo cuando lo exija la legislación aplicable o se acuerde por escrito,
+* el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL»,
+* SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas. 
+* Véase la Licencia en el idioma concreto que rige los permisos y limitaciones
+* que establece la Licencia.
+-->
+
+<xsd:schema 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:eniexpmeta="http://administracionelectronica.gob.es/ENI/XSD/v1.0/expediente-e/metadatos" 
+targetNamespace="http://administracionelectronica.gob.es/ENI/XSD/v1.0/expediente-e/metadatos" 
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="es">XSD METADATOS EXPEDIENTE ELECTRONICO ENI (v1.0)</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="metadatosExp" type="eniexpmeta:TipoMetadatos"/>
+	<xsd:complexType name="TipoMetadatos">
+		<xsd:sequence>
+			<xsd:element name="VersionNTI" type="xsd:anyURI"/>
+			<xsd:element name="Identificador" type="xsd:string"/>
+			<xsd:element name="Organo" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element name="FechaAperturaExpediente" type="xsd:dateTime"/>
+			<xsd:element name="Clasificacion" type="xsd:string"/>
+			<xsd:element name="Estado">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="es">	- E01 - Abierto.
+	- E02 - Cerrado.
+	- E03 - Índice para remisión cerrado. </xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="eniexpmeta:enumeracionEstados"/>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Interesado" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="es">Obligatorio cumplimentar si existe un interesado.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="Id" type="xsd:ID" use="optional"/>
+	</xsd:complexType>
+	<!-- Enumeración de Estados del expediente -->
+	<xsd:simpleType name="enumeracionEstados">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="E01"/>
+			<xsd:enumeration value="E02"/>
+			<xsd:enumeration value="E03"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

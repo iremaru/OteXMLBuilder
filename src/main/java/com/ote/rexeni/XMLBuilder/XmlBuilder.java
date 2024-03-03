@@ -1,7 +1,7 @@
 package com.ote.rexeni.XMLBuilder;
 
-import com.ote.models.InvoiceGroupType;
 import com.ote.models.ObjectFactory;
+import com.ote.models.TipoContenido;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
@@ -25,14 +25,15 @@ public class XmlBuilder {
   public void generate(File sourceFiles) {
     try {
       Workbook workbook = new XSSFWorkbook(sourceFiles);
-      InvoiceGroupType invoices = objectFactory.createFacturasType();
+      TipoContenido invoices = objectFactory.createTipoContenido();
 
       processWorkbook(workbook, invoices);
-      transformToXML(invoices);
+      //transformToXML(invoices);
 
-    } catch (JAXBException e) {
+    } /*catch (JAXBException e) {
       XMLBuilderHandleExceptions.handleException(e);
-    } catch (InvalidFormatException e) {
+    }
+      */ catch (InvalidFormatException e) {
       //TODO: Handle exception
       System.out.println("--------------------------------------");
       System.out.println("---------- INVALID FORMAT EXCEPTION");
@@ -46,13 +47,16 @@ public class XmlBuilder {
     }
   }
 
-  void processWorkbook(Workbook workbook, InvoiceGroupType invoice) {
+  void processWorkbook(Workbook workbook, TipoContenido invoice) {
+    System.out.println("-----------------------------");
+    System.out.println("--- INICIANDO");
+    System.out.println("-----------------------------");
     Sheet sheet = workbook.getSheetAt(0);
     Iterator<Row> iterator = sheet.rowIterator();
 
     boolean headerHasPassed = false;
     boolean isInvoiceSection = false;
-    boolean invoiceSectionHasPassed = false; //Invoice section has no started, so 'has passed';
+    //boolean invoiceSectionHasPassed = false; //Invoice section has no started, so 'has passed';
     int firstInvoices = 0, secondInvoices = 0, totalEntries = 0;
 
     while (iterator.hasNext()) {
@@ -60,31 +64,34 @@ public class XmlBuilder {
       //Enter the row
       Row row = iterator.next();
       Cell firstColumn = row.getCell(0);
-      if (
-          firstColumn != null
-              && !invoiceSectionHasPassed //Whether we are in the section, or never have we checked if we have entered the section
-              && (headerHasPassed || (headerHasPassed = checkIsHeaderRow(row))) //It has already passed the header, or we are in the header
-              && (isInvoiceSection || (isInvoiceSection = !checkIsHeaderRow(row))) //And we are in the section, or we have passed the header (in which case we are in the section)
-              && (!(invoiceSectionHasPassed = !checkWhetherItIsInvoiceSection(row))) //And we haven't left the invoices section.
+      Cell thirdColumn = row.getCell(2);
 
-      ) {
-        String firstColumnText = firstColumn.getStringCellValue();
+      //invoiceSectionHasPassed = headerHasPassed && !isInvoiceSection;
+      isInvoiceSection = headerHasPassed;
+      headerHasPassed = headerHasPassed || checkIsHeaderRow(row);
 
-        //New invoices set the invoice date in the first column,
-        //otherwise it is the second line of the previous invoice
-        boolean isNewInvoice = checkWhetherColumnIsADate(firstColumn);
+      System.out.println("---------------------LINEA: " + row.getRowNum());
 
+      if(firstColumn != null && isInvoiceSection && firstColumn.getCellType() == CellType.STRING){
         totalEntries++;
-        if (isNewInvoice) {
+        String firstColumnText = firstColumn.getStringCellValue();
+        if (checkWhetherColumnIsADate(firstColumn)) {
           firstInvoices++;
+          processFirstEntrieInvoice(row, invoice);
           System.out.println("--- FACTURAS: " + firstColumnText);
 
         } else {
           secondInvoices++;
+          proccesSecondLineInvoice(row);
         }
       }
+      else if (firstColumn == null && thirdColumn != null && thirdColumn.getCellType() == CellType.NUMERIC) {
+        totalEntries++;
+        proccesSecondLineInvoice(row);
+        System.out.println("--- SEGUNDA LÍNEA DE FACTURA || Tipo: " + thirdColumn.getCellType());
+        secondInvoices++;
 
-
+      }
     }
     System.out.println(">ENTRADAS TOTALES:             " + totalEntries);
     System.out.println(">FACTURAS TOTALES:             " + firstInvoices);
@@ -106,23 +113,53 @@ public class XmlBuilder {
         }*/
   }
 
-  void transformToXML(InvoiceGroupType invoices) throws JAXBException {
+  void transformToXML(TipoContenido invoices) throws JAXBException {
 
-    JAXBContext context = JAXBContext.newInstance(InvoiceGroupType.class);
+    JAXBContext context = JAXBContext.newInstance(TipoContenido.class);
     Marshaller marshaller = context.createMarshaller();
-    JAXBElement<InvoiceGroupType> jaxbElement = objectFactory.createFacturas(invoices);
+    JAXBElement<TipoContenido> jaxbElement = objectFactory.createContenido(invoices);
 
     marshaller.marshal(jaxbElement, new File(PATH + filename + fileExtension));
   }
 
+  void processFirstEntrieInvoice(Row row, TipoContenido invoice) {
+
+    Cell cellDate = row.getCell(0);
+    Cell cellID = row.getCell(1);
+    Cell cellOperationID = row.getCell(2);
+    Cell cellSocialTheme = row.getCell(3);
+    Cell cellNIF = row.getCell(5);
+    Cell cellDescription = row.getCell(6);
+    Cell cellBaseImponible = row.getCell(7);
+    Cell cellTipo = row.getCell(8);
+    Cell cellIVA = row.getCell(9);
+    Cell cellBasExenta = row.getCell(10);
+    Cell cellTotal = row.getCell(12);
+
+    JAXBElement<TipoContenido> contentType = objectFactory.createContenido(invoice);
+
+    //contentType.setNombre(cellName.getStringCellValue());
+    //contentType.setImporte( (int)cellImporte.getNumericCellValue() );
+
+    //invoice.getFactura().add(facturaType);
+  }
+
+  void proccesSecondLineInvoice(Row row) {
+
+  }
+
   boolean checkIsHeaderRow(Row row) {
-    String firstColumnValue = row.getCell(0).getStringCellValue();
+    Cell firstColumn = row.getCell(0);
+    if (firstColumn == null) return false;
+
+    String firstColumnValue = firstColumn.getStringCellValue();
     System.out.println("COLUMN: " + firstColumnValue);
     return firstColumnValue.equalsIgnoreCase(FIRST_COLUMN_NAME);
   }
 
   /**
    * Check if the invoice section is over for a given sheet.
+   * //TODO: Hay que revisar esto. Hay muchas líneas en blanco en medio de las facturas. Por lo que este método daría un falso positivo rápidamente.
    *
    * @param row the row to be checked
    * @return true if the invoice section is over, false otherwise
@@ -130,12 +167,20 @@ public class XmlBuilder {
   boolean checkInvoiceSectionIsOver(Row row) {
     //Column 0 is the date, but if we are using this method, it means that
     //there is no data in column 0, and we will check if there are data in the other columns.
-    int firstColumnToCheck = 1;
+    int firstColumnToCheck = 2;
     for (int column = firstColumnToCheck; column < MAX_COLUMNS_WITH_DATA; column++) {
-      if (row.getCell(column) == null && row.getCell(column).getStringCellValue().isBlank())
-        return true;
+      Cell cell = row.getCell(column);
+      boolean isNullCell = cell == null;
+      boolean isBlankCell = !isNullCell && cell.getCellType() == CellType.BLANK;
+
+
+      System.out.println("---- La celda " + column + " es nula?" + isNullCell);
+      System.out.println("---- La celda " + column + " esta en blanco?: " + isBlankCell);
+      System.out.println("----- ¿Cerramos la sección?: " + !(!isNullCell && !isBlankCell));
+
+      if (!isNullCell && !isBlankCell) return false;
     }
-    return false;
+    return true;
   }
 
   /**
@@ -145,8 +190,8 @@ public class XmlBuilder {
    * @param row the row to be checked
    * @return true if the row is an invoice section, false otherwise
    */
-  boolean checkWhetherItIsInvoiceSection(Row row) {
-    return !checkIsHeaderRow(row) && !checkInvoiceSectionIsOver(row);
+  boolean checkWhetherItIsInvoiceSection(Row row, boolean headerHasPassed) {
+    return headerHasPassed && !checkInvoiceSectionIsOver(row);
   }
 
   /**
@@ -157,8 +202,6 @@ public class XmlBuilder {
    */
   boolean checkWhetherColumnIsADate(Cell firstColumn) {
     String text = firstColumn.getStringCellValue();
-    //!firstColumnText.isBlank();
-        //firstColumn.getCellType() == CellType.NUMERIC && firstColumn.getDateCellValue() != null;
     return !text.isBlank() && text.contains("/");
   }
 

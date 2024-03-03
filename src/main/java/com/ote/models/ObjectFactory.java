@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Facturas_QNAME = new QName("", "facturas");
+    private final static QName _Contenido_QNAME = new QName("http://administracionelectronica.gob.es/ENI/XSD/v1.0/documento-e/contenido", "contenido");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.ote.models
@@ -34,32 +34,24 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InvoiceGroupType }
+     * Create an instance of {@link TipoContenido }
      * 
      */
-    public InvoiceGroupType createFacturasType() {
-        return new InvoiceGroupType();
+    public TipoContenido createTipoContenido() {
+        return new TipoContenido();
     }
 
     /**
-     * Create an instance of {@link FacturaType }
-     * 
-     */
-    public FacturaType createFacturaType() {
-        return new FacturaType();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InvoiceGroupType }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link TipoContenido }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link InvoiceGroupType }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link TipoContenido }{@code >}
      */
-    @XmlElementDecl(namespace = "", name = "facturas")
-    public JAXBElement<InvoiceGroupType> createFacturas(InvoiceGroupType value) {
-        return new JAXBElement<InvoiceGroupType>(_Facturas_QNAME, InvoiceGroupType.class, null, value);
+    @XmlElementDecl(namespace = "http://administracionelectronica.gob.es/ENI/XSD/v1.0/documento-e/contenido", name = "contenido")
+    public JAXBElement<TipoContenido> createContenido(TipoContenido value) {
+        return new JAXBElement<TipoContenido>(_Contenido_QNAME, TipoContenido.class, null, value);
     }
 
 }
