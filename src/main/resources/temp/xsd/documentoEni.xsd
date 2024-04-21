@@ -1,20 +1,40 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!--
-* Copyright 2011-2020 Gobierno de España 
-* Licencia con arreglo a la Licencia Pública de la Unión Europea (EUPL), Versión 1.2 o
-* versiones posteriores en cuanto sean aprobadas por la Comisión Europea (la «Licencia»);
-* Solo podrá usarse esta obra si se respeta la Licencia.
-*
-* Puede obtenerse una copia de la Licencia en:
-* http://eur-lex.europa.eu/legal-content/ES/TXT/PDF/?uri=CELEX:32017D0863&from=EN
-*
-* Salvo cuando lo exija la legislación aplicable o se acuerde por escrito,
-* el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL»,
-* SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas. 
-* Véase la Licencia en el idioma concreto que rige los permisos y limitaciones
-* que establece la Licencia.
--->
-
+<!DOCTYPE xsd:schema [
+		<!ELEMENT xsd:schema (xsd:annotation|xsd:import|xsd:element|xsd:complexType)*>
+		<!ATTLIST xsd:schema
+				xmlns:xsd CDATA #REQUIRED
+				xmlns:enids CDATA #REQUIRED
+				xmlns:enidocmeta CDATA #REQUIRED
+				xmlns:enifile CDATA #REQUIRED
+				xmlns:enidoc CDATA #REQUIRED
+				targetNamespace CDATA #REQUIRED
+				elementFormDefault CDATA #REQUIRED
+				attributeFormDefault CDATA #REQUIRED>
+		<!ELEMENT xsd:annotation (xsd:documentation)*>
+		<!ELEMENT xsd:documentation (#PCDATA)>
+		<!ATTLIST xsd:documentation
+				xml:lang CDATA #REQUIRED>
+		<!ELEMENT xsd:import (#PCDATA)>
+		<!ATTLIST xsd:import
+				namespace CDATA #REQUIRED
+				schemaLocation CDATA #REQUIRED>
+		<!ELEMENT xsd:element (xsd:annotation)*>
+		<!ATTLIST xsd:element
+				maxOccurs CDATA #IMPLIED
+				minOccurs CDATA #IMPLIED
+				name CDATA #IMPLIED
+				ref CDATA #IMPLIED
+				type CDATA #IMPLIED>
+		<!ELEMENT xsd:complexType (xsd:sequence|xsd:attribute)*>
+		<!ATTLIST xsd:complexType
+				name CDATA #REQUIRED>
+		<!ELEMENT xsd:sequence (xsd:element)*>
+		<!ELEMENT xsd:attribute (#PCDATA)>
+		<!ATTLIST xsd:attribute
+				name CDATA #REQUIRED
+				type CDATA #REQUIRED
+				use CDATA #REQUIRED>
+		]>
 <xsd:schema 
 xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 xmlns:enids="http://administracionelectronica.gob.es/ENI/XSD/v1.0/firma" 

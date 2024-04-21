@@ -20,6 +20,7 @@ public class App extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         Parent root = scene.getRoot();
+
         scene.setFill(Color.TRANSPARENT);
 
         root.setOnMousePressed(pressEvent -> {

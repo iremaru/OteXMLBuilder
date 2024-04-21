@@ -1,6 +1,6 @@
 package com.ote.rexeni;
 
-import com.ote.rexeni.XMLBuilder.XmlBuilder;
+import com.ote.rexeni.XMLBuilder.CSVwrapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,8 +67,8 @@ public class AppController {
     @FXML
     protected void onTransformButtonClick() {
         if (sourceFiles != null) {
-            XmlBuilder builder = new XmlBuilder();
-            sourceFiles.forEach(builder::generate);
+            CSVwrapper builder = new CSVwrapper();
+            sourceFiles.forEach(file -> builder.generate(null, file.getPath()));
         }
     }
 
